@@ -1,0 +1,438 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Al Call</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Al Call" />
+<!--script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/mdb.css" rel='stylesheet' type='text/css' />
+<link href="css/jquery.notify.css" rel='stylesheet' type='text/css' />
+<link href="css/font-awesome.css" rel="stylesheet">
+<link href="css/datatables.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- Graph CSS -->
+
+<!-- jQuery -->
+<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+<!-- lined-icons -->
+<!-- //lined-icons -->
+<script src="js/jquery.js"></script>
+<script type="text/javascript" src="js/modernizr.custom.04022.js"></script>
+    <script>
+        function horodatage(date) {
+            var post = new Date(date).getTime();
+            var month = new Date(date).getMonth();
+            var day = new Date(date).getDate();
+            var year = new Date(date).getFullYear();
+            var hour = new Date(date).getHours();
+            var min = new Date(date).getMinutes();
+            var atMoment = new Date().getTime();
+            post /= 1000;
+            atMoment /= 1000;
+            var fior = parseInt((atMoment - post), 10);
+            if (fior >= 86400) {
+                if (parseInt((fior/86400), 10) == 1){
+
+                    document.write("Hier, " + hour + "H:"+ min +"min");
+                }
+                else{
+                    document.write("Le " + day +"-"+ month +"-"+ year +", "+ hour + "H:"+ min +"min");
+                }
+            }
+            else if(fior >= 3600 && fior < 86400){
+                if(parseInt((fior/3600), 10) == 1){
+                    document.write("il y a " + parseInt((fior/3600), 10) + " Hr");
+                }
+                else{
+                    document.write("il y a " + parseInt((fior/3600), 10) + " Hrs");
+                }
+            }
+            else if(fior >= 60 && fior < 3600){
+                if(parseInt((fior/60), 10) == 1)
+                    document.write("il y a " + parseInt((fior/60), 10) + " Min");
+                else
+                    document.write("il y a " + parseInt((fior/60), 10) + " Mins");
+            }
+            else{
+                if (fior == 0){
+                    document.write("A l'instant");
+                }
+                document.write("il y a " + fior + " Sec");
+            }
+        }
+    </script>
+<!--clock init-->
+</head> 
+<body>
+   <div class="page-container">
+   <!--/content-inner-->
+	<div class="left-content">
+	   <div class="inner-content">
+							<!--//outer-wp-->
+									<div class="outter-wp">
+										<!--/tabs-->
+										 <div class="tab-main">
+											 <!--/tabs-inner-->
+												<div class="tab-inner">
+												      <div id="tabs" class="tabs">
+													            <h2 class="inner-tittle">Gestions </h2>
+															<div class="graph">
+																					<nav>
+																						<ul>
+																							<li><a href="#section-1" class="icon-shop"><i class="fa fa-comments-o"></i> <span>Messages</span></a></li>
+																							<li><a href="#section-2" class="icon-cup"><i class="fa fa-tags"></i> <span>Confirmé</span></a></li>
+																							<li><a href="#section-3" class="icon-food"><i class="fa fa-users"></i> <span>Comptes</span></a></li>
+																							<li><a href="#section-4" class="icon-lab"><i class="fa fa-key"></i> <span>Password</span></a></li>
+																						</ul>
+																					</nav>
+																					<div class="content tab">
+																						<section id="section-1">
+																							<div class="container-fluid">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-5 col-sm-10 col-xs-12 numInWait">
+                                                                                                        <h2>En attente</h2>
+                                                                                                        <div class="tables">
+                                                                                                            <table class="display table table-hover table-striped table-bordered" id="awitTable" style="width:100%">
+                                                                                                                <thead>
+                                                                                                                <tr>
+                                                                                                                    <th>Ref</th>
+                                                                                                                    <th>Numero</th>
+                                                                                                                    <th>Type</th>
+                                                                                                                    <th>Contenu</th>
+                                                                                                                </tr>
+                                                                                                                </thead>
+                                                                                                                <tbody>
+                                                                                                                {% for item in all.await %}
+
+                                                                                                                <tr class="mtn" id="{{ item.ident }}">
+                                                                                                                    <th scope="row">{{ item.ref }}</th>
+                                                                                                                    <th>{{ item.numbers }}</th>
+                                                                                                                    <td>{{item.name}}</td>
+                                                                                                                    <td>{{item.money}}</td>
+                                                                                                                </tr>
+                                                                                                                {% endfor %}
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-7 col-sm-10 col-xs-12">
+                                                                                                        <div class="chat-mdl-grid widget-shadow ">
+                                                                                                            <h4 class="title3">Number | Ref | Contenu</h4>
+                                                                                                            <div class="scrollbar" id="style-2">
+                                                                                                                <!--div class="activity-row activity-row1 activity-left">
+                                                                                                                    <div class="col-xs-9 activity-img2">
+                                                                                                                        <div class="activity-desc-sub1">
+                                                                                                                            <p>Quae sed sequi sint tenetur Atque ea mollitia pariatu </p>
+                                                                                                                            <span class="right">8:00 PM</span>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="col-xs-3 activity-img"><img src="images/in8.jpg" class="img-responsive" alt=""></div>
+                                                                                                                    <div class="clearfix"> </div>
+                                                                                                                </div-->
+                                                                                                            </div>
+                                                                                                            <div class="chat-bottom">
+                                                                                                                <form class="reply_inAwait">
+                                                                                                                    <input type="text" placeholder="Reply" id="TESTS" required="">
+                                                                                                                    <input type="submit" value="Envoyer" class="btnCore">
+                                                                                                                </form>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+																							</div>
+																						</section>
+																						<section id="section-2">
+																							<div class="row">
+                                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                                    <div class="tables">
+                                                                                                        <table class="display table table-hover table-striped table-bordered" id="Table" style="width:100%">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>Ref</th>
+                                                                                                                <th>Numero</th>
+                                                                                                                <th>Type</th>
+                                                                                                                <th>Contenu</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            {% for item in all.send %}
+
+                                                                                                                <tr>
+                                                                                                                    <th scope="row">{{ item.ref}}</th>
+                                                                                                                    <th>{{ item.numbers}}</th>
+                                                                                                                    <td>{{item.name}}</td>
+                                                                                                                    <td>{{item.money}}</td>
+                                                                                                                </tr>
+                                                                                                            {% endfor %}
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+																						</section>
+																						<section id="section-3">
+																							<div class="row">
+                                                                                                <div class="col-md-6 col-sm-12 col-xs-12 forms">
+
+                                                                                                    <div data-example-id="form-validation-states-with-icons">
+                                                                                                        <form>
+                                                                                                            <div class="row form-group has-success has-feedback">
+                                                                                                                <div class="col-md-6 col-sm-6 col-xs-6 input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                                                                    <input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status" placeholder="Pseudo" required>
+                                                                                                                </div>
+                                                                                                                <div class="col-md-6 col-sm-6 col-xs-6 input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                                                                                    <input type="text" class="form-control" id="inputGroupSuccess2" aria-describedby="inputGroupSuccess1Status" placeholder="Password" required>
+                                                                                                                </div>
+                                                                                                                <div align="center">
+                                                                                                                    <button type="button" id="createAdmin"><i class="fa fa-save"></i> Creer Un Administrateur</button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </form>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                                                                    <table class="table">
+                                                                                                        <tbody id="metaSpolit">
+                                                                                                        {% for item in all.admin %}
+                                                                                                        <tr class="table-row">
+                                                                                                            <td class="table-img">
+                                                                                                                <img src="images/ts.jpg" style="width: 60px;height: 60px" alt="" />
+                                                                                                            </td>
+                                                                                                            <td class="table-text">
+                                                                                                                <h6>{{ item.pseudo }}</h6>
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <span class="fam">{{ item.message }}</span>
+                                                                                                            </td>
+                                                                                                            <td class="march">
+                                                                                                                {% if item.login_date != null %}
+                                                                                                                <script>horodatage("{{ item.login_date }}")</script>
+                                                                                                                {% else %}
+                                                                                                                    Aucune Connexion
+                                                                                                                {% endif %}
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        {% endfor %}
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            </div>
+																						</section>
+																						<section id="section-4">
+																							<div class="row">
+                                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                                    <div class="grid-1">
+                                                                                                        <div class="form-body">
+                                                                                                            <div class="col-md-12 col-sm-12 col-sm-12">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input type="password" id="old" class="form-control teint" placeholder="Old Password">
+                                                                                                                    <input type="password" id="new" class="form-control teint" placeholder="New Password">
+                                                                                                                    <input type="password" id="conf" class="form-control teint" placeholder="Confirm Password">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-12 col-sm-12 col-sm-12">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input type="submit" id="changePass" value="Enregitrer">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+																								</div>
+																						</section>
+																					</div><!-- /content -->
+																				</div>
+																				<!-- /tabs -->
+																				
+																			</div>
+																			<script src="js/cbpFWTabs.js"></script>
+																			<script>
+																				new CBPFWTabs( document.getElementById( 'tabs' ) );
+																			</script>
+																			<h3 class="inner-tittle two">Statistic </h3>
+																			<div class="graph">
+																
+																						        <div class="tabs">
+																							  <nav class="second"> <a>Trimestre</a> <a>Année</a> <a>Total</a> </nav>
+																							  <div class="context">
+                                                                                                  <div class="row">
+                                                                                                      {% for item in all.mot %}
+                                                                                                  <div class="col-md-4">
+                                                                                                      <div class="stats-left ">
+                                                                                                          <h5>{{ item.moi }}</h5>
+                                                                                                          <h4> Clients</h4>
+                                                                                                      </div>
+                                                                                                      <div class="stats-right">
+                                                                                                          <label>{{ item.count }}</label>
+                                                                                                      </div>
+                                                                                                      <div class="clearfix"> </div>
+                                                                                                  </div>
+                                                                                                      {% endfor %}
+                                                                                                  <div class="clearfix"> </div>
+                                                                                                  </div>
+                                                                                                  </div>
+																							  <div class="context">
+                                                                                                  <div class="row">
+                                                                                                      {% for item in all.stat %}
+                                                                                                          <div class="col-md-4">
+                                                                                                              <div class="stats-left ">
+                                                                                                                  <h5>{{ item.years }}</h5>
+                                                                                                                  <h4> Clients</h4>
+                                                                                                              </div>
+                                                                                                              <div class="stats-right">
+                                                                                                                  <label>{{ item.num }}</label>
+                                                                                                              </div>
+                                                                                                              <div class="clearfix"> </div>
+                                                                                                          </div>
+                                                                                                      {% endfor %}
+                                                                                                      <div class="clearfix"> </div>
+                                                                                                  </div>
+                                                                                              </div>
+																							  <div class="context">
+                                                                                                      <div class="col-md-4">
+                                                                                                          <div class="stats-left ">
+                                                                                                              <h5>Total</h5>
+                                                                                                              <h4>Message</h4>
+                                                                                                          </div>
+                                                                                                          <div class="stats-right">
+                                                                                                              <label>{{ all.send.length }}</label>
+                                                                                                          </div>
+                                                                                                          <div class="clearfix"> </div>
+                                                                                                      </div>
+                                                                                                      <div class="col-md-4 states-mdl">
+                                                                                                          <div class="stats-left">
+                                                                                                              <h5>Total</h5>
+                                                                                                              <h4>Client</h4>
+                                                                                                          </div>
+                                                                                                          <div class="stats-right">
+                                                                                                              <label> {{ all.totalNum }}</label>
+                                                                                                          </div>
+                                                                                                          <div class="clearfix"> </div>
+                                                                                                      </div>
+                                                                                                      <div class="col-md-4 states-last">
+                                                                                                          <div class="stats-left">
+                                                                                                              <h5>Total</h5>
+                                                                                                              <h4>Moyenne</h4>
+                                                                                                          </div>
+                                                                                                          <div class="stats-right">
+                                                                                                              <label>{{ all.totalMoy }}</label>
+                                                                                                          </div>
+                                                                                                          <div class="clearfix"> </div>
+                                                                                                      </div>
+                                                                                                      <div class="clearfix"> </div>
+																								</div>
+																							</div>
+																							<script>
+																							$(function() {
+																							  $('.tabs nav a').on('click', function() {
+																								show_content($(this).index());
+																							  });
+																							  
+																							  show_content(0);
+
+																							  function show_content(index) {
+																								// Make the content visible
+																								$('.tabs .context.visible').removeClass('visible');
+																								$('.tabs .context:nth-of-type(' + (index + 1) + ')').addClass('visible');
+
+																								// Set the tab to selected
+																								$('.tabs nav.second a.selected').removeClass('selected');
+																								$('.tabs navnav.second a:nth-of-type(' + (index + 1) + ')').addClass('selected');
+																							  }
+																							});
+																							</script>
+																					
+																			</div>
+																 <div class="clearfix"> </div>
+														</div>
+												</div>
+                                        <input type="hidden" value="{{ user.id }}" id="me">
+											  <!--//tabs-inner-->
+										 </div>	
+										<!--//tabs-->
+									</div>
+								<!--//outer-wp-->
+									 <!--footer section start-->
+										<footer>
+										   <p>&copy 2019 Al Call . All Rights Reserved | Design by <a href="https://nan.ci/" target="_blank">NaN</a></p>
+										</footer>
+									<!--footer section end-->
+								</div>
+
+				<!--//content-inner-->
+			<!--/sidebar-menu-->
+				<div class="sidebar-menu">
+					<header class="logo">
+					<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="/"> <span id="logo"> <h1>Al Call</h1></span>
+					<!--<img id="logo" src="" alt="Logo"/>--> 
+				  </a> 
+				</header>
+			<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
+			<!--/down-->
+							<div class="down">	
+									  <a href="/"><img src="images/aucuneP.gif" style="width: 150px; height: 150px"></a>
+									  <a href="/"><span class=" name-caret">{{ user.pseudo }}</span></a>
+									<ul>
+										<li><a class="tooltips" href="/logout"><span>Log out</span><i class="fa fa-sign-out"></i></a></li>
+										</ul>
+									</div>
+							   <!--//down-->
+
+							  </div>
+							  <div class="clearfix"></div>		
+							</div>
+							<script>
+							var toggle = true;
+										
+							$(".sidebar-icon").click(function() {                
+							  if (toggle)
+							  {
+								$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+								$("#menu span").css({"position":"absolute"});
+							  }
+							  else
+							  {
+								$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+								setTimeout(function() {
+								  $("#menu span").css({"position":"relative"});
+								}, 400);
+							  }
+											
+											toggle = !toggle;
+										});
+							</script>
+<!--js -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<!-- Bootstrap Core JavaScript -->
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.js"></script>
+   <script src="js/mdb.js"></script>
+   <script src="js/jquery.notify.js"></script>
+   <script type="text/javascript" src="js/datatables.min.js"></script>
+   <script src="js/scripts.js"></script>
+   <script>
+       $(document).ready(function () {
+           $('#awitTable').DataTable({
+               "dom": '<"toolbar">frtip',
+               "paging": true,
+               "pagingType": "full_numbers"
+           });
+           $('#Table').DataTable({
+               "dom": '<"toolbar">frtip',
+               "paging": true,
+               "pagingType": "full_numbers"
+           });
+       })
+   </script>
+
+</body>
+</html>
