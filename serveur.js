@@ -505,6 +505,7 @@ function getRecentEmail(auth) {
                 mot[i].countD = contentD.num;*/
                 mot[i].count = contens.num;
                 mot[i].moi = mois[mot[i].month - 1];
+                console.log("Dans la boucle pour string mois" + JSON.stringify(mot))
             }
 
             for(let i = years; i >= years - 2 ; i--){
@@ -516,6 +517,8 @@ function getRecentEmail(auth) {
             num.totalNum = total.num;
             num.totalMoy = parseInt(tot.moyenne, 10);
             num.mot = mot.reverse();
+            console.log("FIN la boucle pour string mois" + JSON.stringify(num.mot))
+
             num.stat = stat.reverse();
             num.admin = admin;
             res.render(`${__dirname}/Public/tabs.twig`, {user: req.session.alcall, all: num});
